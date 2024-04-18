@@ -56,9 +56,12 @@ const HeaderBottom = () => {
                 ) : (
                   <AccountCircleIcon />
                 )}
-                <h3 className="font-titleFont font-bold text-lg tracking-wide">
-                  Hello, Sign In
-                </h3>
+                { userInfo ? (
+                    <h3 className="font-titleFont font-bold text-lg tracking-wide">{userInfo.userName}</h3>
+                  ) : (
+                    <h3 className="font-titleFont font-bold text-lg tracking-wide">Hello, Sign In</h3>
+                  )
+                }
               </div>
               {/* ============================ Content & Devices Start here ================ */}
               <SideNavContent
