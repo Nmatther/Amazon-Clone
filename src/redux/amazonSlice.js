@@ -47,8 +47,12 @@ export const amazonSlice = createSlice({
     // User authentication
     setUserInfo:(state, action) => {
       state.userInfo = action.payload
+    },
+
+
+    userSignOut:(state) => {
+      state.userInfo=null
     }
- 
     // ============= UserInfo Reducers End here ================
   },
 });
@@ -60,6 +64,7 @@ export const {
   increaseQuantity,
   decreaseQuantity,
   setUserInfo,
+  userSignOut
 
 } = amazonSlice.actions;
 export default amazonSlice.reducer;
