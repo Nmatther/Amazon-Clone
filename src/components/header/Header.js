@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import ArrowDropDownOutlinedIcon from "@mui/icons-material/ArrowDropDownOutlined";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -9,8 +9,12 @@ import { allItems } from "../../constants";
 import { logo } from "../../assets/index";
 import HeaderBottom from "./HeaderBottom";
 import { Link } from "react-router-dom";
+import { getAuth, signOut } from "firebase/auth";
+import { userSignOut } from "../../redux/amazonSlice";
 
 const Header = () => {
+  const auth = getAuth();
+  const dispatch = useDispatch();
   const products = useSelector((state) => state.amazonReducer.products);
   const userInfo = useSelector((state) => state.amazonReducer.userInfo);
   const ref = useRef();
@@ -23,6 +27,17 @@ const Header = () => {
       }
     });
   }, [ref, showAll]);
+
+  const handleLogout=()=>{
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        dispatch(userSignOut())
+      })
+      .catch((error) => {
+        // An error happened
+      });
+  }
 
 
   return (
@@ -126,10 +141,7 @@ const Header = () => {
           </div>
         </Link>
         {userInfo && (
-          <div
-            
-            className="flex flex-col justify-center items-center headerHover relative"
-          >
+          <div onClick={handleLogout} className="flex flex-col justify-center items-center headerHover relative">
             <LogoutIcon />
             <p className="hidden mdl:inline-flex text-xs font-semibold text-whiteText">
               Log out
