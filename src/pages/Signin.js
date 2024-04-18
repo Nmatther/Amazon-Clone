@@ -4,8 +4,11 @@ import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { RotatingLines } from "react-loader-spinner";
 import { darkLogo } from "../assets/index";
+import { useDispatch } from "react-redux";
+import { setUserInfo } from "../redux/amazonSlice";
 
 const Signin = () => {
+  const dispatch = useDispatch()
   const auth = getAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -43,6 +46,12 @@ const Signin = () => {
       .then((userCredential) => {
           // Signed in 
           const user = userCredential.user;
+          dispatch(setUserInfo({
+            _id: user.uid,
+            userName: user.displayName,
+            email: user.email,
+            image: user.photoURL
+          }))
         // ...
         setLoading(false)
           setSuccessMsg("Logged in Successfully! Welcome Back!");
@@ -51,6 +60,7 @@ const Signin = () => {
           }, 2000)
         })
         .catch((error) => {
+          setLoading(false);
           const errorCode = error.code;
           if (errorCode.includes("auth/invalid-email")) {
             setUserEmailErr("Invalid Email");
