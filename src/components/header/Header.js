@@ -28,25 +28,25 @@ const Header = () => {
   return (
     <div className="sticky top-0 z-50">
       <div className="w-full bg-amazon_blue text-white px-4 py-3 flex md:justify-between items-center gap-2 md:gap-4 lgl:gap-2 xl:gap-4">
-        {/* ===================== Header Image Start here ======================== */}
+        {/* ================= Header Image Start here ====================== */}
         <Link to="/">
           <div className="headerHover">
             <img className="w-24 mt-2" src={logo} alt="logoImage" />
           </div>
         </Link>
-        {/* ===================== Header Image End here ========================== */}
-        {/* ===================== Header Deliver Start here ====================== */}
+        {/* ================ Header Image End here ======================= */}
+        {/* ============= Header Deliver Start here ===================== */}
         <div className="hidden md:inline-flex headerHover">
           <LocationOnOutlinedIcon />
           <p className="flex flex-col text-xs text-lightText font-light">
             Deliver to{" "}
             <span className="text-sm font-semibold -mt-1 text-whiteText">
-              Oman
+              Matt
             </span>
           </p>
         </div>
-        {/* ===================== Header Deliver End here ======================== */}
-        {/* ===================== Header Search Start here ======================== */}
+        {/* ================= Header Deliver End here ===================== */}
+        {/* ================ Header Search Start here ==================== */}
         <div className="hidden lgl:inline-flex h-10 rounded-md flex-grow relative">
           <span
             onClick={() => setShowAll(!showAll)}
@@ -83,14 +83,22 @@ const Header = () => {
             <SearchIcon />
           </span>
         </div>
-        {/* ===================== Header Search End here ========================== */}
-        {/* ===================== Header Signin Start here ======================== */}
+        {/* ================= Header Search End here ======================= */}
+        {/* =============== Header Signin Start here ====================== */}
         <Link to="/signin">
           <div className="flex flex-col items-start justify-center headerHover">
-           
+            {userInfo ? (
+              <p>
+                {" "}
+                <p className="text-xs text-lightText font-light">
+                {userInfo}
+              </p>
+            </p>
+            ) : (
               <p className="text-xs text-lightText font-light">
                 Hello, sign in
               </p>
+            )}
            
             <p className="hidden md:inline-flex text-sm font-semibold -mt-1 text-whiteText">
               Accounts & Lists{" "}
@@ -100,14 +108,14 @@ const Header = () => {
             </p>
           </div>
         </Link>
-        {/* ===================== Header Signin End here ========================== */}
-        {/* ===================== Header Orders Start here ======================== */}
+        {/* ================= Header Signin End here ====================== */}
+        {/* ================= Header Orders Start here ===================== */}
         <div className="hidden mdl:flex flex-col items-start justify-center headerHover">
           <p className="text-xs text-lightText font-light">Returns</p>
           <p className="text-sm font-semibold -mt-1 text-whiteText">& Orders</p>
         </div>
-        {/* ===================== Header Orders End here ========================== */}
-        {/* ===================== Header Cart Start here ========================== */}
+        {/* ================ Header Orders End here ======================= */}
+        {/* ================= Header Cart Start here ====================== */}
         <Link to="/cart">
           <div className="flex items-start justify-center headerHover relative">
             <ShoppingCartIcon />
@@ -130,7 +138,7 @@ const Header = () => {
             </p>
           </div>
         )}
-        {/* ===================== Header Cart End here ============================ */}
+        {/* =============== Header Cart End here================= */}
         {/* ============ Image Start here ================ */}
         {/* ============ Image End here ================== */}
         {/* ============ Deliver Start here ============== */}
